@@ -696,27 +696,29 @@ void SoftwareSerial::begin(long speed, uint32_t RX_buffer_size)
         CNCONGbits.ON = 1;
     #endif
 
-    #if defined(_PORTA)
-        CNCONAbits.SIDL = 0;
-    #endif
-    #if defined(_PORTB)
-        CNCONBbits.SIDL = 0;
-    #endif
-    #if defined(_PORTC)
-        CNCONCbits.SIDL = 0;
-    #endif
-    #if defined(_PORTD)
-        CNCONDbits.SIDL = 0;
-    #endif
-    #if defined(_PORTE)
-        CNCONEbits.SIDL = 0;
-    #endif
-    #if defined(_PORTF)
-        CNCONFbits.SIDL = 0;
-    #endif
-    #if defined(_PORTG)
-        CNCONGbits.SIDL = 0;
-    #endif
+	#ifndef __PIC32MZEFADC__
+		#if defined(_PORTA)
+			CNCONAbits.SIDL = 0;
+		#endif
+		#if defined(_PORTB)
+			CNCONBbits.SIDL = 0;
+		#endif
+		#if defined(_PORTC)
+			CNCONCbits.SIDL = 0;
+		#endif
+		#if defined(_PORTD)
+			CNCONDbits.SIDL = 0;
+		#endif
+		#if defined(_PORTE)
+			CNCONEbits.SIDL = 0;
+		#endif
+		#if defined(_PORTF)
+			CNCONFbits.SIDL = 0;
+		#endif
+		#if defined(_PORTG)
+			CNCONGbits.SIDL = 0;
+		#endif
+	#endif
 
         // On PPS PIC32s, we just set the proper bit in the proper I/O port's CNEN
         _rxPort->cnen.set = _rxBit;
